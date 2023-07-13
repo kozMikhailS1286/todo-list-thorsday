@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
+import {todolistAPI} from "../api/todolist-api";
 
 export default {
     title: 'API'
@@ -42,7 +43,7 @@ export const CreateTodolist = () => {
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        const todolistId = ""
+        const todolistId = "e3869ac1-5c91-4758-bf1c-8a3f4fd14971"
         axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`,
             settings
         )
@@ -56,7 +57,11 @@ export const DeleteTodolist = () => {
 export const UpdateTodolistTitle = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
+        const todolistId = "f1d68861-2039-4b92-947b-fb620dfea609"
+        todolistAPI.updateTodolist(todolistId, 'SOME NEW TITLE').then((res) => {
+            setState(res.data)
+        })
     }, [])
 
-    return <div>{JSON.stringify(state)}</div>
+    return <div> {JSON.stringify(state)}</div>
 }
