@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {TaskType} from "../Todolist";
 
 
 type TodolistType = {
@@ -74,5 +75,15 @@ export const todolistAPI = {
             'todo-lists'
         )
         return promise
+    },
+    getTasks(todolistId: string) {
+        return instance.get(`todo-lists/${todolistId}/tasks`)
+    },
+    delateTask(todolistId: string, taskId: string) {
+        return instance.delete(`todo-lists/${todolistId}/tasks/${taskId}`)
+    },
+    createTask(todolistId: string, taskTitle: string) {
+        return instance.post<ResponseType<TaskType>>(`todo-lists/${todolistId}/tasks`,
+            {title: taskTitle});
     },
 }
